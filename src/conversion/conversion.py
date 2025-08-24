@@ -83,7 +83,22 @@ class Conversion:
             decimal_a_binario(10) -> "1010"
             decimal_a_binario(255) -> "11111111"
         """
-        
+        binario =''
+
+        if decimal == 0:
+            binario = '0'
+        else:
+            while decimal > 0:
+
+                divi = decimal//2
+
+                if decimal - divi*2 == 0:
+                    binario= '0'+binario
+                else:
+                    binario='1'+binario
+
+                decimal = divi
+        return (binario)
     
     def binario_a_decimal(self, binario):
         """
@@ -99,8 +114,28 @@ class Conversion:
             binario_a_decimal("1010") -> 10
             binario_a_decimal("11111111") -> 255
         """
-        pass
-    
+        
+        lista = list(binario)
+        lista.reverse()
+
+        Decimal = 0
+        multi= 1
+
+        if  lista[0] == "1":
+            Decimal=1
+
+        del lista[0]
+
+        for n in lista:
+            multi = multi * 2
+
+            if n == "1":
+                Decimal= Decimal + multi
+        
+
+        return (Decimal)
+
+
     def decimal_a_romano(self, numero):
         """
         Convierte un número decimal a numeración romana.
@@ -115,7 +150,20 @@ class Conversion:
             decimal_a_romano(9) -> "IX"
             decimal_a_romano(1994) -> "MCMXCIV"
         """
-        pass
+        dicRomanos = [
+               (1000, "M"), (900, "CM"), (500, "D"), (400, "CD"), 
+                (100, "C"), (90, "XC"), (50, "L"), (40, "XL"), 
+                (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I")
+                ]
+
+        romano = ""
+    
+        for num, letra in dicRomanos:
+               while numero >= num:
+                numero-= num
+                romano+= letra
+
+        return (romano) 
     
     def romano_a_decimal(self, romano):
         """
@@ -131,7 +179,23 @@ class Conversion:
             romano_a_decimal("IX") -> 9
             romano_a_decimal("MCMXCIV") -> 1994
         """
-        pass
+        dic= {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+        
+        f= len(romano)
+        decimal= 0
+        for i in range(f):
+                
+                letra_actual= dic[romano[i]]
+
+                if i +1 < f:
+                        letra_siguiente = dic[romano[i+1]]
+
+                        if letra_actual < letra_siguiente:
+                                decimal-= letra_actual
+                                continue
+                decimal+=letra_actual
+                        
+        return (decimal)
     
     def texto_a_morse(self, texto):
         """
@@ -147,7 +211,32 @@ class Conversion:
             texto_a_morse("SOS") -> "... --- ..."
             texto_a_morse("HELLO") -> ".... . .-.. .-.. ---"
         """
-        pass
+        codeMorse= {
+        "A": ".-",    "B": "-...",  "C": "-.-.",  "D": "-..",   "E": ".",
+        "F": "..-.",  "G": "--.",   "H": "....",  "I": "..",    "J": ".---",
+        "K": "-.-",   "L": ".-..",  "M": "--",    "N": "-.",    "O": "---",
+        "P": ".--.",  "Q": "--.-",  "R": ".-.",   "S": "...",   "T": "-",
+        "U": "..-",   "V": "...-",  "W": ".--",   "X": "-..-",  "Y": "-.--",
+        "Z": "--..",
+
+        "0": "-----", "1": ".----", "2": "..---", "3": "...--", "4": "....-",
+        "5": ".....", "6": "-....", "7": "--...", "8": "---..", "9": "----."}
+        TEXTO = texto.upper()
+
+        n = len(TEXTO)
+
+        morse =""
+
+        for x in range(n):
+                Traducir = codeMorse[TEXTO[x]]
+                if x >= 1:
+                    
+                    morse += " "+Traducir
+
+                else: 
+                     morse += Traducir
+
+        return morse
     
     def morse_a_texto(self, morse):
         """
@@ -163,4 +252,39 @@ class Conversion:
             morse_a_texto("... --- ...") -> "SOS"
             morse_a_texto(".... . .-.. .-.. ---") -> "HELLO"
         """
-        pass
+
+        decodificacion= ""
+
+        if morse == "":
+
+            decodificacion = ""
+
+        else: 
+            codeMorse= {
+            ".-" : "A",   "-...": "B",  "-.-.": "C",  "-..": "D",   ".": "E",
+            "..-.": "F",  "--.": "G",   "....": "H",  "..": "I",    ".---": "J",
+            "-.-": "K",   ".-..": "L",  "--": "M",    "-.": "N",    "---": "O",
+            ".--.": "P",  "--.-": "Q",  ".-.": "R",   "...": "S",   "-": "T",
+            "..-": "U",   "...-": "V",  ".--": "W",   "-..-": "X",  "-.--": "Y",
+            "--..": "Z", "--": " ",
+
+            "-----": "0", ".----": "1", "..---": "2", "...--": "3", "....-": "4",
+            ".....": "5", "-....": "6", "--...": "7", "---..": "8", "----.": "9"}
+
+            morse += " "
+            f = len(morse)
+            letraMorse = ""
+
+            for i in range(f):
+                
+                    if morse[i] == " " and morse[i-1] != " ":
+                        
+                        decodificacion+= codeMorse[letraMorse]
+
+                        letraMorse = ""
+
+                    else: 
+                        if morse[i] != " ":
+                            letraMorse += morse[i]
+        
+        return decodificacion
