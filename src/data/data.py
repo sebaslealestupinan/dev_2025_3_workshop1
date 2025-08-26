@@ -14,7 +14,14 @@ class Data:
         Returns:
             list: Lista con los elementos en orden inverso
         """
-        pass
+        
+        listaInvertida= []
+
+        for n in range(len(lista) -1, -1, -1):
+                
+                listaInvertida.append(lista[n])                
+
+        return listaInvertida
     
     def buscar_elemento(self, lista, elemento):
         """
@@ -28,7 +35,18 @@ class Data:
         Returns:
             int: Índice del elemento o -1 si no se encuentra
         """
-        pass
+
+        resultadBusqueda = -1
+    
+        if len(lista) > 0:
+
+            for i in range (len(lista)-1):
+                
+                if elemento == lista[i] and resultadBusqueda == -1:
+                     
+                     resultadBusqueda = i
+        
+        return resultadBusqueda
     
     def eliminar_duplicados(self, lista):
         """
@@ -41,7 +59,23 @@ class Data:
         Returns:
             list: Lista sin elementos duplicados
         """
-        pass
+        
+        indice = len(lista) -1
+
+        for r in range(indice):
+                
+                inicio= r+1
+
+                while inicio <= indice:
+
+                        if lista[r] == lista[inicio] and type(lista[r]) == type(lista[inicio]):
+                                del lista[inicio]
+                                indice-=1
+                        else: 
+                                inicio+=1
+
+                        
+        return lista
     
     def merge_ordenado(self, lista1, lista2):
         """
@@ -54,7 +88,43 @@ class Data:
         Returns:
             list: Lista combinada y ordenada
         """
-        pass
+        nuevaLista=[]
+
+        if len( lista1) == 0:
+
+               nuevaLista= lista2
+
+        elif len(lista2) == 0:
+
+               nuevaLista=lista1
+
+        else:               
+
+            #indi= (len( lista1)-1) + ( len(lista2) -1)
+        
+            cont= 0
+        
+            while cont +1 <= len( lista1):
+               
+                    if lista1[cont] > lista2[cont]:
+                       
+                           nuevaLista.append(lista2[cont])
+                           #cont += 1
+                           nuevaLista.append(lista1[cont])
+
+                    elif lista2[cont] == lista1[cont]:
+                       
+                           nuevaLista.append(lista1[cont])
+                           #cont += 1 
+                           nuevaLista.append(lista2[cont])
+
+                    else:
+                           nuevaLista.append(lista1[cont])
+                           #cont += 1
+                           nuevaLista.append(lista2[cont])
+                    cont+=1
+                
+        return nuevaLista
     
     def rotar_lista(self, lista, k):
         """
@@ -67,7 +137,23 @@ class Data:
         Returns:
             list: Lista rotada
         """
-        pass
+        if not lista:
+                return lista
+        else:
+                
+            rotaciones = 0
+
+            ultimo= len(lista)-1
+
+            while rotaciones < k:
+                
+                lista.insert(0, lista[ultimo])
+
+                del lista[ultimo+1]
+
+                rotaciones += 1
+
+            return lista
     
     def encuentra_numero_faltante(self, lista):
         """
@@ -79,7 +165,15 @@ class Data:
         Returns:
             int: El número que falta en la secuencia
         """
-        pass
+                
+        N_faltante=1
+
+        while N_faltante-1 < len(lista) and N_faltante == lista[N_faltante-1]:
+                        
+                    N_faltante+=1
+                    
+
+        return N_faltante
     
     def es_subconjunto(self, conjunto1, conjunto2):
         """
@@ -92,7 +186,22 @@ class Data:
         Returns:
             bool: True si conjunto1 es subconjunto de conjunto2, False en caso contrario
         """
-        pass
+        respuesta= True
+
+        if conjunto1 == []:
+              return respuesta
+        
+        else: 
+              cont= 0
+              while respuesta ==  True  and cont < len(conjunto1):
+                    
+                    if conjunto1[cont] not in conjunto2:
+                          
+                          respuesta= False
+                    else:
+                          cont+=1
+              return respuesta
+                    
     
     def implementar_pila(self):
         """
@@ -101,7 +210,30 @@ class Data:
         Returns:
             dict: Diccionario con métodos push, pop, peek y is_empty
         """
-        pass
+        pil= []
+
+        def push (valor):
+              pil.append(valor)
+
+        def pop ():
+              
+              if pil:
+                    return pil.pop()
+              return None
+        
+        def peek():
+               
+               if pil:
+                     return pil[-1]
+               return None
+        def is_empty():
+              return len(pil) == 0
+        
+        return {
+              
+              "push": push,  "pop": pop,
+              "peek": peek,  "is_empty": is_empty
+        }
     
     def implementar_cola(self):
         """
@@ -110,7 +242,28 @@ class Data:
         Returns:
             dict: Diccionario con métodos enqueue, dequeue, peek y is_empty
         """
-        pass
+        cola = []
+
+        def enqueue(elemento):
+              cola.append(elemento)
+
+        def dequeue():
+              if not is_empty():
+                    return cola.pop(0)
+              return None
+        def peek():
+              if cola:
+                    return cola[0]
+              return None
+        def is_empty():
+              return len(cola) == 0
+        
+        return {
+              "enqueue" : enqueue,
+              "dequeue" : dequeue,
+              "peek" : peek,
+              "is_empty": is_empty
+        }
     
     def matriz_transpuesta(self, matriz):
         """
