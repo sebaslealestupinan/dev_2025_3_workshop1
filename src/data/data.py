@@ -275,4 +275,22 @@ class Data:
         Returns:
             list: Matriz transpuesta
         """
-        pass
+        matriz_transversa = []
+
+        if not matriz or len(matriz) == 1:
+              
+              return matriz
+        
+        
+        for i in matriz[0]:
+                
+                  
+                matriz_transversa.append([i])
+
+        for m in range(1, len(matriz)):
+                for n in range(len(matriz_transversa)):
+                      
+                    matriz_transversa[n].append(matriz[m][n])
+                
+
+                return matriz_transversa
