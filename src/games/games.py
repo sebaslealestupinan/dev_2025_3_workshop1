@@ -15,8 +15,32 @@ class Games:
             - Tijera vence a papel
             - Papel vence a piedra
         """
-        pass
-    
+        J1= jugador1.lower()
+        J2= jugador2.lower()
+
+        element= ["piedra", "tijera", "papel"]
+
+        if J1 not in element or J2 not in element:    
+                                 
+                return "invalid"
+        
+        else:
+
+            if J1 == J2:
+                    
+                return "empate"
+                
+            if (
+            (J1 == "piedra" and J2 == "tijera") or
+            (J1 == "tijera" and J2 == "papel") or
+            (J1 == "papel" and J2 == "piedra")
+                ):
+                return "jugador1"
+            
+            else:
+
+                return "jugador2"
+
     def adivinar_numero_pista(self, numero_secreto, intento):
         """
         Proporciona pistas para un juego de adivinanza de números.
@@ -28,7 +52,15 @@ class Games:
         Returns:
             str: "correcto", "muy alto" o "muy bajo"
         """
-        pass
+        if numero_secreto == intento:
+
+            return "correcto"
+        if numero_secreto < intento:
+
+            return "muy alto"
+        if numero_secreto > intento:
+
+            return "muy bajo"
     
     def ta_te_ti_ganador(self, tablero):
         """
@@ -45,8 +77,38 @@ class Games:
              ["O", "O", " "],
              [" ", " ", " "]] -> "X"
         """
-        pass
+        for fila in tablero:
+            if all(c == "X" for c in fila):
+
+                return "X"
+            
+            if all(c == "O" for c in fila):
+
+                return "O"
+
     
+        for colum in range(3):
+            if tablero[0][colum] == tablero[1][colum] == tablero[2][colum] != " ":
+
+                return tablero[0][colum]
+
+  
+        if tablero[0][0] == tablero[1][1] == tablero[2][2] != " ":
+
+            return tablero[0][0]
+        
+        if tablero[0][2] == tablero[1][1] == tablero[2][0] != " ":
+
+            return tablero[0][2]
+
+    
+        for fila in tablero:
+            for cel in fila:
+                if cel == " ":
+                    return "continua"
+
+        return "empate"
+         
     def generar_combinacion_mastermind(self, longitud, colores_disponibles):
         """
         Genera una combinación aleatoria para el juego Mastermind.
@@ -82,4 +144,27 @@ class Games:
             - La torre se mueve horizontal o verticalmente
             - No puede saltar sobre otras piezas
         """
-        pass
+        if 0 <= hasta_col <= 8 and 0 <= hasta_fila <= 8:
+        
+            if desde_col == hasta_col and desde_fila == hasta_fila: 
+
+                return False
+            
+            elif desde_col == hasta_col and desde_fila != hasta_fila:
+                
+                return True
+            
+            elif desde_col != hasta_col and desde_fila == hasta_fila:
+
+                return True
+            
+            elif desde_col != hasta_fila and desde_col != hasta_col:
+
+                return False
+            
+            else: 
+
+                return False
+
+        else: 
+            return False
