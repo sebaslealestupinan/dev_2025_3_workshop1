@@ -124,7 +124,16 @@ class Games:
             generar_combinacion_mastermind(4, ["rojo", "azul", "verde"]) 
             -> ["rojo", "azul", "rojo", "verde"]
         """
-        pass
+        import random
+        indice = len(colores_disponibles)-1
+        combinacion = []
+
+        for i in range(longitud):
+
+            combinacion.append(colores_disponibles[random.randint(0, indice)])
+
+        return combinacion 
+                        
     
     def validar_movimiento_torre_ajedrez(self, desde_fila, desde_col, hasta_fila, hasta_col, tablero):
         """
@@ -144,27 +153,36 @@ class Games:
             - La torre se mueve horizontal o verticalmente
             - No puede saltar sobre otras piezas
         """
-        if 0 <= hasta_col <= 8 and 0 <= hasta_fila <= 8:
-        
-            if desde_col == hasta_col and desde_fila == hasta_fila: 
-
-                return False
-            
-            elif desde_col == hasta_col and desde_fila != hasta_fila:
-                
-                return True
-            
-            elif desde_col != hasta_col and desde_fila == hasta_fila:
-
-                return True
-            
-            elif desde_col != hasta_fila and desde_col != hasta_col:
-
-                return False
-            
-            else: 
-
-                return False
-
-        else: 
+        if not (0 <= desde_fila <= 7 and 0 <= desde_col <= 7 and 0 <= hasta_fila <= 7 and 0 <= hasta_col <= 7):
             return False
+
+        if desde_fila == hasta_fila and desde_col == hasta_col:
+            return False
+
+        if not (desde_fila == hasta_fila or desde_col == hasta_col):
+            return False
+
+        if desde_fila == hasta_fila:
+
+            salida = 1 if hasta_col > desde_col else -1
+            for col in range(desde_col + salida, hasta_col, salida):
+                if tablero[desde_fila][col] != " ":
+                    return False
+
+        elif desde_col == hasta_col:
+
+            salida = 1 if hasta_fila > desde_fila else -1
+            for fila in range(desde_fila + salida, hasta_fila, salida):
+                if tablero[fila][desde_col] != " ":
+                    return False
+
+        destino = tablero[hasta_fila][hasta_col]
+        origen = tablero[desde_fila][desde_col]
+
+        if destino != " ":
+
+           if destino[0] == origen[0]:
+                    
+                  return False
+
+        return True
