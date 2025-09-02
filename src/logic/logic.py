@@ -14,7 +14,10 @@ class Logica:
         Returns:
             bool: Resultado de a AND b
         """
-        pass
+        if a and b: 
+            return True
+        else: 
+            return False
     
     def OR(self, a, b):
         """
@@ -27,7 +30,10 @@ class Logica:
         Returns:
             bool: Resultado de a OR b
         """
-        pass
+        if a or b: 
+            return True
+        else: 
+            return False
     
     def NOT(self, a):
         """
@@ -39,7 +45,10 @@ class Logica:
         Returns:
             bool: Resultado de NOT a
         """
-        pass
+        if not a: 
+            return True
+        else: 
+            return False
     
     def XOR(self, a, b):
         """
@@ -52,7 +61,12 @@ class Logica:
         Returns:
             bool: Resultado de a XOR b
         """
-        pass
+
+        if (not a and b)  or (not b and a): 
+             
+             return True
+        else: 
+             return False
     
     def NAND(self, a, b):
         """
@@ -65,7 +79,11 @@ class Logica:
         Returns:
             bool: Resultado de a NAND b
         """
-        pass
+        if not (a and  b):
+
+            return True
+        else: 
+            return False
     
     def NOR(self, a, b):
         """
@@ -78,7 +96,11 @@ class Logica:
         Returns:
             bool: Resultado de a NOR b
         """
-        pass
+        if not (a or b):
+            
+            return True
+        else: 
+            return False
     
     def XNOR(self, a, b):
         """
@@ -91,7 +113,11 @@ class Logica:
         Returns:
             bool: Resultado de a XNOR b
         """
-        pass
+        if (a and b) or not (a or b):
+
+            return True
+        else: 
+            return False
     
     def implicacion(self, a, b):
         """
@@ -104,7 +130,10 @@ class Logica:
         Returns:
             bool: Resultado de la implicación
         """
-        pass
+        if not a or b:
+             return True
+        else:
+            return False
     
     def bi_implicacion(self, a, b):
         """
@@ -117,6 +146,10 @@ class Logica:
         Returns:
             bool: Resultado de la bi-implicación
         """
-        pass
+        if a == b:
+            return True
+        
+        else: 
+            return False
     
     

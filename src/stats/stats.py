@@ -12,7 +12,12 @@ class Stats:
         Ejemplo:
             promedio([1, 2, 3, 4, 5]) -> 3.0
         """
-        pass
+        promedio = 0
+        for i in numeros:
+
+            promedio+=i
+
+        return promedio/len(numeros)         
     
     def mediana(self, numeros):
         """
