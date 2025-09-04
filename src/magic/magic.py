@@ -14,7 +14,20 @@ class Magic:
         Returns:
             int: El n-ésimo número de Fibonacci
         """
-        pass
+        fibonacci = 0
+        sumar= 1 
+        if n == 0:
+            return fibonacci
+        if n ==1 or n == 2:
+            return 1
+        else:
+            for i in range(n):
+
+                fibonacci = fibonacci + sumar
+                sumar= fibonacci - sumar 
+
+            return fibonacci
+
     
     def secuencia_fibonacci(self, n):
         """
@@ -26,7 +39,26 @@ class Magic:
         Returns:
             list: Lista con los primeros n números de Fibonacci
         """
-        pass
+        secuencia = [0]
+        fibonacci = 0
+        sumar= 1 
+        if n ==1:
+            return secuencia
+        
+        elif n == 2: 
+            secuencia.append(1)
+            return secuencia
+        
+        else:
+            
+            for i in range(n - 1):
+
+                fibonacci = fibonacci + sumar
+                secuencia.append(fibonacci)
+
+                sumar= fibonacci - sumar 
+
+            return secuencia
     
     def es_primo(self, n):
         """
@@ -38,7 +70,24 @@ class Magic:
         Returns:
             bool: True si n es primo, False en caso contrario
         """
-        pass
+        if 0 < n:
+            nDivisore = 0
+            for i in range(n):
+
+                if n % (i+1) == 0: 
+                
+                    nDivisore += 1
+
+            if nDivisore == 2:
+
+                return True
+            else: 
+
+                return False
+            
+        else: 
+            return False
+        
     
     def generar_primos(self, n):
         """
@@ -50,7 +99,27 @@ class Magic:
         Returns:
             list: Lista de números primos hasta n
         """
-        pass
+        if n < 2:
+            return []
+
+        numPrimos = []
+
+        for i in range(2, n + 1):
+
+            es_primo = True
+
+            limite = int(i**0.5) + 1
+
+            for j in range(2, limite):
+                if i % j == 0:
+
+                    es_primo = False
+                    break
+
+            if es_primo:
+                numPrimos.append(i)
+
+        return numPrimos
     
     def es_numero_perfecto(self, n):
         """
@@ -62,7 +131,17 @@ class Magic:
         Returns:
             bool: True si n es un número perfecto, False en caso contrario
         """
-        pass
+        if n <= 1:
+            return False
+
+        suma_divisores = 0
+
+        for i in range(1, n):
+            if n % i == 0:
+                
+                suma_divisores += i
+
+        return suma_divisores == n
     
     def triangulo_pascal(self, filas):
         """
